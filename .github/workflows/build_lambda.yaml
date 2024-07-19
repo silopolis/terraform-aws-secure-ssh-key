@@ -36,4 +36,3 @@ jobs:
           branch: ${{ github.ref_name }} # This refers to the branch being pushed to
           force: false # Optional: force push if needed
           directory: .
-          commit_message: Update lambda.zip

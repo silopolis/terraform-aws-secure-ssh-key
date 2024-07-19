@@ -26,6 +26,7 @@ jobs:
         run: npm install
       - uses: reviewdog/action-eslint@v1
         with:
+          workdir: lambda
           github_token: ${{ secrets.GITHUB_TOKEN }}
           reporter: github-pr-check
           filter_mode: added
