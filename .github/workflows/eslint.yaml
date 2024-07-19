@@ -1,0 +1,33 @@
+name: eslint
+on:
+  push:
+    branches:
+      - main
+      - master
+      - prod
+      - develop
+
+jobs:
+  eslint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Read Node.js version from package.json
+        id: read_version
+        run: |
+          NODE_VERSION=$(jq -r '.engines.node' "lambda/package.json")
+          echo "NODE_VERSION=${NODE_VERSION}" >> $GITHUB_ENV
+      - name: Set up Node.js environment
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Install dependencies
+        working-directory: lambda
+        run: npm install
+      - uses: reviewdog/action-eslint@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          reporter: github-pr-check
+          filter_mode: added
+          eslint_flags: "lambda/"
+          level: "error"
