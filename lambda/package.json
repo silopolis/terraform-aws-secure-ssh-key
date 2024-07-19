@@ -2,7 +2,7 @@
   "name": "lambda-ssh-key-secret",
   "author": "Scott Miller",
   "engines": {
-    "node": "12.x"
+    "node": "20.x"
   },
   "dependencies": {
     "aws-sdk": "^2.702.0",
