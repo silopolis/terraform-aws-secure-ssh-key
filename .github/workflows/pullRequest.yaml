@@ -44,10 +44,11 @@ jobs:
         run: npm install
       - uses: reviewdog/action-eslint@v1
         with:
+          work-directory: lambda
           github_token: ${{ secrets.GITHUB_TOKEN }}
           reporter: github-pr-check
           filter_mode: added
-          eslint_flags: "lambda/"
+          eslint_flags: "."
           level: "error"
   build:
     runs-on: ubuntu-latest
@@ -66,9 +67,6 @@ jobs:
       - name: Install dependencies
         working-directory: lambda
         run: npm install
-      - name: Build Lambda
-        working-directory: lambda
-        run: npm run build # Customize this step if you have a build step
       - name: Package Lambda function
         working-directory: lambda
         run: zip -r lambda.zip .
