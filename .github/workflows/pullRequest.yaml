@@ -2,6 +2,7 @@
 name: pull request
 on:
   pull_request:
+  push:
 
 jobs:
   # TODO: #22 add job using https://github.com/reviewdog/action-alex
