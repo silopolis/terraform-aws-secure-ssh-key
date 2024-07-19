@@ -21,6 +21,12 @@ variable "keepers" {
   type        = map(string)
 }
 
+variable "key_type" {
+  default     = "RSA"
+  description = "Type of key pair to generate. Can be 'RSA' or 'ED25519'."
+  type        = string
+}
+
 variable "key_bits" {
   default     = 2048
   description = "Number of bits to be used in RSA key generation"

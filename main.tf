@@ -104,6 +104,7 @@ resource "aws_lambda_function" "this" {
   environment {
     variables = {
       KEY_BITS = var.key_bits
+      KEY_TYPE = var.key_type
     }
   }
 
