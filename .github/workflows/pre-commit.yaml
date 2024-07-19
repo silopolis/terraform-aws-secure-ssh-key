@@ -11,15 +11,15 @@ jobs:
   pre-commit-check:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v5
       - name: Install prerequisites
         run: ./bin/install-ubuntu.sh
       - name: initialize Terraform
         run: terraform init --backend=false
       - name: pre-commit
-        uses: pre-commit/action@v2.0.3
+        uses: pre-commit/action@v3.0.1
         env:
           AWS_DEFAULT_REGION: us-east-1
           # many of these are covered by better reviewdog linters below
