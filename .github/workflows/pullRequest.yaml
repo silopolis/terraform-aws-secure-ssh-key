@@ -52,9 +52,14 @@ jobs:
           level: "error"
   build:
     runs-on: ubuntu-latest
+    permissions:                # Job-level permissions configuration starts here
+      contents: write           # 'write' access to repository contents
+      pull-requests: write      # 'write' access to pull requests
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
       - name: Read Node.js version from package.json
         id: read_version
         run: |
@@ -71,12 +76,10 @@ jobs:
         working-directory: lambda
         run: zip -r lambda.zip .
       - name: Commit and push lambda.zip
-        uses: ad-m/github-push-action@v0.8.0
+        uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ github.ref_name }} # This refers to the branch being pushed to
-          force: false # Optional: force push if needed
-          directory: .
+          commit_message: Commit and push lambda.zip
+          ref: ${{ github.ref_name }} # This refers to the branch being pushed to
   tflint:
     runs-on: ubuntu-latest
     steps:
