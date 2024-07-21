@@ -9,3 +9,8 @@
 *.tfvars
 
 lambda_invocation_output
+
+# Editors and IDEs
+.idea
+.vscode
+*.code-workspace
